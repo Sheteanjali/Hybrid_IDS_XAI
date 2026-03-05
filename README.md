@@ -62,19 +62,21 @@ Hybrid_IDS_XAI
 ├── .gitignore
 └── README.md
 📊 Project Outputs
-1️⃣ Model Training Performance
 
+
+1️⃣ Model Training Performance
 This graph shows how the model’s accuracy and loss change during training.
+
 ![alt text](training_history.png)
 
 2️⃣ Confusion Matrix
-
 The confusion matrix shows how well the IDS model classifies normal traffic and attack traffic.
+
 ![alt text](confusion_matrix-1.png)
 
 3️⃣ Explainable AI – SHAP Visualization
-
 SHAP explains the importance of features in model predictions.
+
 ![alt text](xai_shap_plot.png)
 
 
