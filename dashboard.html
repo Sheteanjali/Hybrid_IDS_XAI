@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>NIDS SHIELD | Hybrid XAI Terminal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap');
+        body { font-family: 'JetBrains Mono', monospace; background: #020617; color: #94a3b8; }
+        .cyber-panel { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(34, 211, 238, 0.2); box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .highlight-box { border-left: 4px solid #06b6d4; background: rgba(6, 182, 212, 0.05); padding: 12px; }
+        .neon-text { color: #22d3ee; text-shadow: 0 0 8px rgba(34, 211, 238, 0.4); }
+        .pulse-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
+    </style>
+</head>
+<body class="p-6">
+
+    <header class="flex justify-between items-center mb-10 pb-6 border-b border-slate-800">
+        <div class="flex items-center gap-4">
+            <div class="pulse-dot"></div>
+            <div>
+                <h1 class="text-2xl font-black tracking-tighter text-white uppercase">Hybrid <span class="neon-text">NIDS-XAI</span></h1>
+                <p class="text-[10px] tracking-[0.3em] text-slate-500 uppercase font-bold">Explainable Intelligence // SOC Terminal v1.4</p>
+            </div>
+        </div>
+        <div class="text-right">
+            <p class="text-[10px] text-slate-500 uppercase">System Integrity</p>
+            <p class="text-sm font-bold text-emerald-400 tracking-widest uppercase">Validated (99.8%)</p>
+        </div>
+    </header>
+
+    <div class="grid grid-cols-12 gap-8">
+        
+        <div class="col-span-12 lg:col-span-3 space-y-6">
+            <div class="cyber-panel p-6 rounded-2xl">
+                <h3 class="text-xs font-bold text-cyan-400 mb-6 uppercase tracking-widest">Model Performance</h3>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2 text-[10px] font-bold"><span>VALIDATION ACCURACY</span> <span class="text-white">99.8%</span></div>
+                        <div class="w-full bg-slate-800 h-1 rounded-full"><div class="bg-cyan-500 h-1 rounded-full" style="width: 99.8%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2 text-[10px] font-bold"><span>F1-SCORE (MACRO)</span> <span class="text-white">1.00</span></div>
+                        <div class="w-full bg-slate-800 h-1 rounded-full"><div class="bg-purple-500 h-1 rounded-full" style="width: 100%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cyber-panel p-6 rounded-2xl">
+                <h3 class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">Confusion Matrix</h3>
+                <img src="/static/confusion_matrix.png" class="w-full rounded-lg border border-slate-800 mb-4">
+                <div class="highlight-box">
+                    <p class="text-[10px] leading-relaxed text-slate-300 italic">
+                        <strong>Insight:</strong> Near-perfect classification of 17,410 attack samples. High precision ensures <u>zero false negatives</u> for critical reconnaissance alerts.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-span-12 lg:col-span-6">
+            <div class="cyber-panel p-8 rounded-3xl relative overflow-hidden">
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h2 class="text-white text-lg font-bold">SHAP FEATURE ATTRIBUTION</h2>
+                        <p class="text-[10px] text-cyan-500 font-bold uppercase tracking-widest mt-1">Interpreting the CNN-LSTM Black-Box</p>
+                    </div>
+                    <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded text-[10px] font-bold tracking-widest">XAI: ACTIVE</span>
+                </div>
+
+                <img src="/static/xai_shap_plot.png" class="w-full h-auto rounded-xl shadow-2xl brightness-95 hover:brightness-105 transition duration-500">
+                
+                <div class="mt-8 grid grid-cols-2 gap-6">
+                    <div class="highlight-box border-l-cyan-500">
+                        <p class="text-xs font-bold text-cyan-400 mb-1">Key Highlighting Point:</p>
+                        <p class="text-[10px] text-slate-400 leading-relaxed italic">
+                            The top feature <strong>"Fwd Packet Length Min"</strong> links AI math to physical reconnaissance behavior. Attackers use fixed-length probes to systematically scan ports.
+                        </p>
+                    </div>
+                    <div class="highlight-box border-l-purple-500">
+                        <p class="text-xs font-bold text-purple-400 mb-1">Operational Benefit:</p>
+                        <p class="text-[10px] text-slate-400 leading-relaxed italic">
+                            Analysts can verify alerts instantly. This transparency turns a "prediction" into an "actionable security insight" for the SOC.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-span-12 lg:col-span-3 space-y-6">
+            <div class="cyber-panel p-6 rounded-2xl">
+                <h3 class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">Training Convergence</h3>
+                <img src="/static/training_history.png" class="w-full rounded-lg mb-4">
+                <p class="text-[10px] text-slate-500 text-center uppercase tracking-tighter">Stability achieved within 5 Epochs</p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-cyan-950/20 border border-cyan-500/10">
+                <h3 class="text-cyan-400 text-xs font-bold uppercase mb-4 tracking-widest">Engine Summary</h3>
+                <ul class="text-[10px] space-y-3 font-medium">
+                    <li class="flex justify-between border-b border-slate-800 pb-1"><span>Architecture:</span> <span class="text-white">CNN-LSTM</span></li>
+                    <li class="flex justify-between border-b border-slate-800 pb-1"><span>Loss Function:</span> <span class="text-white">Categorical CE</span></li>
+                    <li class="flex justify-between border-b border-slate-800 pb-1"><span>Dataset:</span> <span class="text-white">CICIDS2017</span></li>
+                    <li class="flex justify-between"><span>XAI Engine:</span> <span class="text-cyan-400">SHAP Gradient</span></li>
+                </ul>
+            </div>
+            
+            <div class="text-center py-4">
+                <p class="text-[10px] text-slate-600 font-bold tracking-widest italic animate-pulse underline decoration-cyan-900">SYSTEM PROTECTED BY SHIELD AI</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

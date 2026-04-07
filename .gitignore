@@ -1,4 +1,321 @@
-data/
-*.csv
-__pycache__/
-.ipynb_checkpoints/
+At line:1 char:1
++ cd ai-model
++ ~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\ANJALI...system\ai-model:String) [Set-Locatio 
+   n], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
+ 
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system> cd C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\scripts
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\scripts> python train.py
+2026-03-09 12:07:01.826908: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-03-09 12:07:04.798970: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+Found 2174 images belonging to 1 classes.
+Found 543 images belonging to 1 classes.
+2026-03-09 12:07:07.951237: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Training started for 1 categories...
+C:\Users\ANJALI\miniconda3\lib\site-packages\keras\src\trainers\data_adapters\py_dataset_adapter.py:121: UserWarning: Your `PyDataset` class should call `super().__init__(**kwargs)` in its constructor. `**kwargs` can include `workers`, `use_multiprocessing`, `max_queue_size`. Do not pass these arguments to `fit()`, as they will be ignored.
+  self._warn_if_super_not_called()
+Epoch 1/15
+C:\Users\ANJALI\miniconda3\lib\site-packages\keras\src\ops\nn.py:944: UserWarning: You are using a softmax over axis -1 of a tensor of shape (None, 1). This axis has size 1. The softmax operation will always return the value 1, which is likely not what you intended. Did you mean to use a sigmoid instead?    
+  warnings.warn(
+C:\Users\ANJALI\miniconda3\lib\site-packages\keras\src\losses\losses.py:33: SyntaxWarning: In loss categorical_crossentropy, expected y_pred.shape to be (batch_size, num_classes) with num_classes > 1. Received: y_pred.shape=(None, 1). Consider using 'binary_crossentropy' if you only have 2 classes.
+  return self.fn(y_true, y_pred, **self._fn_kwargs)
+68/68 ━━━━━━━━━━━━━━━━━━━━ 102s 1s/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 2/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 60s 883ms/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 3/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 60s 880ms/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 4/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 74s 1s/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 5/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 132s 2s/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 6/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 114s 2s/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 7/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 64s 937ms/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 8/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 64s 936ms/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 9/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 63s 924ms/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 10/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 64s 938ms/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 11/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 62s 914ms/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 12/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 62s 915ms/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 13/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 62s 915ms/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 14/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 63s 923ms/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+Epoch 15/15
+68/68 ━━━━━━━━━━━━━━━━━━━━ 62s 916ms/step - accuracy: 1.0000 - loss: 0.0000e+00 - val_accuracy: 1.0000 - val_loss: 0.0000e+00
+WARNING:absl:You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`.
+Retraining Complete! New model saved at: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\models\garbage_classifier_v2.h5
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\scripts> python ai_model/train.py
+C:\Users\ANJALI\miniconda3\python.exe: can't open file 'C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\scripts\ai_model\train.py': [Errno 2] No such file or directory
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\scripts> cd..
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model> cd..                    
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system> python ai_model/train.py
+C:\Users\ANJALI\miniconda3\python.exe: can't open file 'C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\train.py': [Errno 2] No such file or directory
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system> python ai_model/train.py
+C:\Users\ANJALI\miniconda3\python.exe: can't open file 'C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\train.py': [Errno 2] No such file or directory
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system> 
+ *  History restored 
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system> ls
+
+
+    Directory: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        28-01-2026     18:54                ai_model
+d-----        09-03-2026     14:29                backend
+d-----        11-02-2026     19:53                frontend-admin
+d-----        08-03-2026     19:07                mobile-app
+d-----        08-03-2026     23:39                uploads
+-a----        08-03-2026     19:13             16 .gitignore
+-a----        28-01-2026     22:57          16384 garbage_system.db
+-a----        28-01-2026     14:06              0 README.md
+-a----        08-03-2026     23:52          12288 reports.db
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system> cd backned
+cd : Cannot find path 'C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backned' because it does 
+not exist.
+At line:1 char:1
++ cd backned
++ ~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\ANJALI...-system\backned:String) [Set-Locatio  
+   n], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system> cd backend
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend> ls
+
+
+    Directory: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        01-02-2026     12:04                backend
+d-----        28-01-2026     14:06                controllers
+d-----        28-01-2026     15:00                models
+d-----        28-01-2026     14:06                routes
+d-----        11-02-2026     23:49                uploads
+d-----        09-02-2026     18:57                __pycache__
+-a----        28-01-2026     20:13       11381632 garbage_classifier.h5
+-a----        03-02-2026     16:05          12288 garbage_system.db
+-a----        09-03-2026     13:47           4095 main.py
+-a----        09-03-2026     14:29          20480 reports.db
+-a----        10-02-2026     22:53             49 requirements.txt
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend> cd backend
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\backend> ls
+
+
+    Directory: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\backend
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        01-02-2026     12:06                uploads
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\backend> cd uploads
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\backend\uploads> ls
+
+
+    Directory: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\backend\uploads
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        01-02-2026     12:06         843276 77a13b02-0f08-437c-a0dd-07c9c7a751e8_trash.jpg       
+-a----        01-02-2026     12:04         394058 c1f1403e-32da-45fc-b2b2-9e5b189e1339_trash.jpg      
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\backend\uploads> cd..
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\backend> cd..
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend> cd models
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\models> ls
+
+
+    Directory: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\models
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        28-01-2026     15:00                __pycache__
+-a----        09-02-2026     18:54            564 report.py
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\models> cd..
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend> cd controllers
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\controllers> ls
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend\controllers> cd..
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend> ls
+
+
+    Directory: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        01-02-2026     12:04                backend
+d-----        28-01-2026     14:06                controllers
+d-----        28-01-2026     15:00                models
+d-----        28-01-2026     14:06                routes
+d-----        11-02-2026     23:49                uploads
+d-----        09-02-2026     18:57                __pycache__
+-a----        28-01-2026     20:13       11381632 garbage_classifier.h5
+-a----        03-02-2026     16:05          12288 garbage_system.db
+-a----        09-03-2026     13:47           4095 main.py
+-a----        09-03-2026     14:29          20480 reports.db
+-a----        10-02-2026     22:53             49 requirements.txt
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\backend> cd..
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system> cd ai_model
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model> ls
+
+
+    Directory: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        28-01-2026     14:26                datasets
+d-----        09-03-2026     12:25                models
+d-----        28-01-2026     14:28                scripts
+d-----        28-01-2026     19:00                __pycache__
+-a----        09-02-2026     13:05           1340 inference.py
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model> cd datasets
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets> ls
+
+
+    Directory: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        28-01-2026     14:21                raw_data
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets> cd raw_data
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data> ls
+
+
+    Directory: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data        
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        28-01-2026     14:20                Garbage classification
+-a----        28-01-2026     14:21           6774 one-indexed-files-notrash_test.txt
+-a----        28-01-2026     14:21          27912 one-indexed-files-notrash_train.txt
+-a----        28-01-2026     14:21           5147 one-indexed-files-notrash_val.txt
+-a----        28-01-2026     14:21          39832 one-indexed-files.txt
+-a----        28-01-2026     14:21          39832 zero-indexed-files.txt
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data> cd  Garbage
+ classification
+Set-Location : A positional parameter cannot be found that accepts argument 'classification'.
+At line:1 char:1
++ cd  Garbage classification
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Set-Location], ParameterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.SetLocationCo  
+   mmand
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data> cd Garbage 
+classification 
+Set-Location : A positional parameter cannot be found that accepts argument 'classification'.
+At line:1 char:1
++ cd Garbage classification
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Set-Location], ParameterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.SetLocationCo  
+   mmand
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data> cd Garbage classification
+Set-Location : A positional parameter cannot be found that accepts argument 'classification'.
+At line:1 char:1
++ cd Garbage classification
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Set-Location], ParameterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.SetLocationCo  
+   mmand
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data> cd "Garbage classification"
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data\Garbage classification> ls
+
+
+    Directory:
+    C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data\Garbage
+    classification
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        03-03-2026     17:25                Garbage classification
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data\Garbage classification> cd "Garbage classification"
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data\Garbage classification\Garbage classification> ls
+
+
+    Directory:
+    C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data\Garbage
+    classification\Garbage classification
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        28-01-2026     14:20                cardboard
+d-----        28-01-2026     14:21                glass
+d-----        28-01-2026     14:21                metal
+d-----        03-03-2026     17:38                not_garbage
+d-----        28-01-2026     14:21                paper
+d-----        28-01-2026     14:21                plastic
+d-----        28-01-2026     14:21                trash
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data\Garbage classification\Garbage classification> cd..
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data\Garbage classification> cd..
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets\raw_data> cd..
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\datasets> cd..
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model> cd models
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\models> ls
+
+
+    Directory: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\models
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        04-03-2026     22:58       11383168 garbage_classifier.h5
+-a----        09-03-2026     12:25       24351144 garbage_classifier_v2.h5
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\models> cd..
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model> cd scripts
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\scripts> ls
+
+
+    Directory: C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\scripts
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        09-03-2026     12:06           2456 train.py
+
+
+(base) PS C:\Users\ANJALI\OneDrive\Desktop\smart-garbage-system\ai_model\scripts> 
