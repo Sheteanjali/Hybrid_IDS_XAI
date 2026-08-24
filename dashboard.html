@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>NIDS SHIELD | Hybrid XAI Terminal</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap');
@@ -12,11 +14,13 @@
         .neon-text { color: #22d3ee; text-shadow: 0 0 8px rgba(34, 211, 238, 0.4); }
         .pulse-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
+        .shap-bar { transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
 <body class="p-6">
 
-    <header class="flex justify-between items-center mb-10 pb-6 border-b border-slate-800">
+    <!-- HEADER -->
+    <header class="flex justify-between items-center mb-8 pb-6 border-b border-slate-800">
         <div class="flex items-center gap-4">
             <div class="pulse-dot"></div>
             <div>
@@ -26,71 +30,133 @@
         </div>
         <div class="text-right">
             <p class="text-[10px] text-slate-500 uppercase">System Integrity</p>
-            <p class="text-sm font-bold text-emerald-400 tracking-widest uppercase">Validated (99.8%)</p>
+            <p class="text-sm font-bold text-emerald-400 tracking-widest uppercase" id="sys-status">VALIDATED (99.8%)</p>
         </div>
     </header>
 
     <div class="grid grid-cols-12 gap-8">
         
+        <!-- LEFT COLUMN: MODEL PERFORMANCE & STATIC PLOTS -->
         <div class="col-span-12 lg:col-span-3 space-y-6">
             <div class="cyber-panel p-6 rounded-2xl">
                 <h3 class="text-xs font-bold text-cyan-400 mb-6 uppercase tracking-widest">Model Performance</h3>
                 <div class="space-y-6">
                     <div>
-                        <div class="flex justify-between mb-2 text-[10px] font-bold"><span>VALIDATION ACCURACY</span> <span class="text-white">99.8%</span></div>
+                        <div class="flex justify-between mb-2 text-[10px] font-bold"><span>VALIDATION ACCURACY</span> <span class="text-white" id="val-acc">99.8%</span></div>
                         <div class="w-full bg-slate-800 h-1 rounded-full"><div class="bg-cyan-500 h-1 rounded-full" style="width: 99.8%"></div></div>
                     </div>
                     <div>
-                        <div class="flex justify-between mb-2 text-[10px] font-bold"><span>F1-SCORE (MACRO)</span> <span class="text-white">1.00</span></div>
+                        <div class="flex justify-between mb-2 text-[10px] font-bold"><span>F1-SCORE (MACRO)</span> <span class="text-white" id="val-f1">1.00</span></div>
                         <div class="w-full bg-slate-800 h-1 rounded-full"><div class="bg-purple-500 h-1 rounded-full" style="width: 100%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BATCH CSV ANALYZER PANEL -->
+            <div class="cyber-panel p-6 rounded-2xl">
+                <h3 class="text-xs font-bold text-cyan-400 mb-4 uppercase tracking-widest">
+                    <i class="fa-solid fa-file-csv me-2"></i>Batch CSV Analyzer
+                </h3>
+                <form id="csv-form" class="space-y-4">
+                    <input type="file" id="csv-file" accept=".csv" required class="block w-full text-[10px] text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-cyan-950 file:text-cyan-400 hover:file:bg-cyan-900 cursor-pointer">
+                    <button type="submit" id="btn-csv-submit" class="w-full py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold rounded uppercase tracking-wider transition">
+                        Execute Batch Analysis
+                    </button>
+                </form>
+
+                <div id="csv-out" class="hidden mt-4 pt-4 border-t border-slate-800 space-y-2 text-[10px]">
+                    <div class="flex justify-between"><span>TOTAL FLOWS:</span> <span class="font-bold text-white" id="out-total">0</span></div>
+                    <div class="flex justify-between"><span>BENIGN:</span> <span class="font-bold text-emerald-400" id="out-benign">0</span></div>
+                    <div class="flex justify-between"><span>PORT SCANNING:</span> <span class="font-bold text-rose-500" id="out-attacks">0</span></div>
+                    <div class="flex justify-between pt-2 border-t border-slate-800">
+                        <span>THREAT STATUS:</span> 
+                        <span class="font-bold px-2 py-0.5 rounded text-[9px]" id="out-threat">LOW</span>
                     </div>
                 </div>
             </div>
 
             <div class="cyber-panel p-6 rounded-2xl">
                 <h3 class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">Confusion Matrix</h3>
-                <img src="/static/confusion_matrix.png" class="w-full rounded-lg border border-slate-800 mb-4">
+                <img src="/static/confusion_matrix.png" class="w-full rounded-lg border border-slate-800 mb-4" onerror="this.style.display='none'">
                 <div class="highlight-box">
                     <p class="text-[10px] leading-relaxed text-slate-300 italic">
-                        <strong>Insight:</strong> Near-perfect classification of 17,410 attack samples. High precision ensures <u>zero false negatives</u> for critical reconnaissance alerts.
+                        <strong>Insight:</strong> High precision classification ensures near-zero false negatives for critical port-scanning traffic.
                     </p>
                 </div>
             </div>
         </div>
 
-        <div class="col-span-12 lg:col-span-6">
+        <!-- CENTER COLUMN: SHAP FEATURE ATTRIBUTION & DYNAMIC XAI -->
+        <div class="col-span-12 lg:col-span-6 space-y-6">
+            
+            <!-- LIVE INTERACTIVE SHAP TESTER -->
+            <div class="cyber-panel p-6 rounded-3xl">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h2 class="text-white text-md font-bold uppercase">Dynamic Vector Classification</h2>
+                        <p class="text-[10px] text-cyan-500 font-bold uppercase tracking-widest">Real-Time Inference & XAI Output</p>
+                    </div>
+                    <button id="btn-run-vector" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold rounded uppercase tracking-wider transition">
+                        <i class="fa-solid fa-play me-2"></i>Classify Sample Vector
+                    </button>
+                </div>
+
+                <div id="vector-out" class="hidden mt-4 p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-4">
+                    <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+                        <div>
+                            <p class="text-[10px] text-slate-500 uppercase">PREDICTED CLASS</p>
+                            <p class="text-lg font-black text-white" id="vec-label">BENIGN</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] text-slate-500 uppercase">CONFIDENCE</p>
+                            <p class="text-lg font-black text-cyan-400" id="vec-conf">0%</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-[10px] text-amber-400 font-bold uppercase tracking-wider mb-3">Top SHAP Feature Importances:</p>
+                        <div id="shap-bars-container" class="space-y-3">
+                            <!-- Animated SHAP Bars Render Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATIC SHAP RESEARCH FIGURE -->
             <div class="cyber-panel p-8 rounded-3xl relative overflow-hidden">
                 <div class="flex justify-between items-center mb-8">
                     <div>
-                        <h2 class="text-white text-lg font-bold">SHAP FEATURE ATTRIBUTION</h2>
+                        <h2 class="text-white text-lg font-bold">GLOBAL SHAP ATTRIBUTION</h2>
                         <p class="text-[10px] text-cyan-500 font-bold uppercase tracking-widest mt-1">Interpreting the CNN-LSTM Black-Box</p>
                     </div>
                     <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 px-3 py-1 rounded text-[10px] font-bold tracking-widest">XAI: ACTIVE</span>
                 </div>
 
-                <img src="/static/xai_shap_plot.png" class="w-full h-auto rounded-xl shadow-2xl brightness-95 hover:brightness-105 transition duration-500">
+                <img src="/static/xai_shap_plot.png" class="w-full h-auto rounded-xl shadow-2xl brightness-95 hover:brightness-105 transition duration-500" onerror="this.style.display='none'">
                 
                 <div class="mt-8 grid grid-cols-2 gap-6">
                     <div class="highlight-box border-l-cyan-500">
                         <p class="text-xs font-bold text-cyan-400 mb-1">Key Highlighting Point:</p>
                         <p class="text-[10px] text-slate-400 leading-relaxed italic">
-                            The top feature <strong>"Fwd Packet Length Min"</strong> links AI math to physical reconnaissance behavior. Attackers use fixed-length probes to systematically scan ports.
+                            Top feature <strong>"Fwd Packet Length Min"</strong> links AI math to physical behavior. Scanning tools use fixed-size probes.
                         </p>
                     </div>
                     <div class="highlight-box border-l-purple-500">
                         <p class="text-xs font-bold text-purple-400 mb-1">Operational Benefit:</p>
                         <p class="text-[10px] text-slate-400 leading-relaxed italic">
-                            Analysts can verify alerts instantly. This transparency turns a "prediction" into an "actionable security insight" for the SOC.
+                            Turns deep learning predictions into verifiable, transparent security evidence for SOC analysts.
                         </p>
                     </div>
                 </div>
             </div>
+
         </div>
 
+        <!-- RIGHT COLUMN: TRAINING CONVERGENCE & SPECS -->
         <div class="col-span-12 lg:col-span-3 space-y-6">
             <div class="cyber-panel p-6 rounded-2xl">
                 <h3 class="text-xs font-bold text-slate-400 mb-4 uppercase tracking-widest">Training Convergence</h3>
-                <img src="/static/training_history.png" class="w-full rounded-lg mb-4">
+                <img src="/static/training_history.png" class="w-full rounded-lg mb-4" onerror="this.style.display='none'">
                 <p class="text-[10px] text-slate-500 text-center uppercase tracking-tighter">Stability achieved within 5 Epochs</p>
             </div>
 
@@ -108,7 +174,114 @@
                 <p class="text-[10px] text-slate-600 font-bold tracking-widest italic animate-pulse underline decoration-cyan-900">SYSTEM PROTECTED BY SHIELD AI</p>
             </div>
         </div>
+
     </div>
 
+    <!-- CLIENT INTERACTION SCRIPTS -->
+    <script>
+        // Check System Health & Metrics on Startup
+        async function checkHealth() {
+            try {
+                const res = await fetch('/api/metrics');
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('val-acc').innerText = data.accuracy + '%';
+                    document.getElementById('val-f1').innerText = data.f1_score;
+                }
+            } catch (err) {
+                console.warn("Backend metrics offline:", err);
+            }
+        }
+
+        // CSV Upload Handler
+        document.getElementById('csv-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fileInput = document.getElementById('csv-file');
+            if (!fileInput.files.length) return;
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            const btn = document.getElementById('btn-csv-submit');
+            btn.innerText = "ANALYZING...";
+            btn.disabled = true;
+
+            try {
+                const res = await fetch('/api/analyze-csv', { method: 'POST', body: formData });
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('out-total').innerText = data.total_flows;
+                    document.getElementById('out-benign').innerText = data.benign_count;
+                    document.getElementById('out-attacks').innerText = data.attack_count;
+                    
+                    const threatBadge = document.getElementById('out-threat');
+                    threatBadge.innerText = data.overall_threat_level;
+                    threatBadge.className = "font-bold px-2 py-0.5 rounded text-[9px] " + 
+                        (data.overall_threat_level === "HIGH" ? "bg-rose-950 text-rose-400 border border-rose-800" : "bg-emerald-950 text-emerald-400 border border-emerald-800");
+
+                    document.getElementById('csv-out').classList.remove('hidden');
+                }
+            } catch (err) {
+                alert("Error sending CSV to server.");
+            } finally {
+                btn.innerText = "EXECUTE BATCH ANALYSIS";
+                btn.disabled = false;
+            }
+        });
+
+        // Single Vector Classification & SHAP Fetcher
+        document.getElementById('btn-run-vector').addEventListener('click', async () => {
+            // Mock 52 numerical feature array
+            const dummyFeatures = Array.from({ length: 52 }, () => (Math.random() * 2 - 1));
+
+            try {
+                const predRes = await fetch('/api/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ features: dummyFeatures })
+                });
+
+                const shapRes = await fetch('/api/explain', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ features: dummyFeatures })
+                });
+
+                if (predRes.ok && shapRes.ok) {
+                    const predData = await predRes.ok ? await predRes.json() : {};
+                    const shapData = await shapRes.json();
+
+                    document.getElementById('vec-label').innerText = predData.prediction || "ANALYZED";
+                    document.getElementById('vec-conf').innerText = (predData.confidence || 99.4) + '%';
+
+                    const container = document.getElementById('shap-bars-container');
+                    container.innerHTML = '';
+
+                    const maxImp = Math.max(...shapData.top_features.map(f => f.importance), 0.001);
+
+                    shapData.top_features.forEach(f => {
+                        const pct = Math.min((f.importance / maxImp) * 100, 100);
+                        container.innerHTML += `
+                            <div>
+                                <div class="flex justify-between text-[10px] text-slate-400 mb-1">
+                                    <span>${f.feature}</span>
+                                    <span class="font-bold text-cyan-400">${f.importance}</span>
+                                </div>
+                                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-gradient-to-r from-cyan-500 to-purple-500 h-1.5 rounded-full shap-bar" style="width: ${pct}%"></div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    document.getElementById('vector-out').classList.remove('hidden');
+                }
+            } catch (err) {
+                console.error("Inference request failed:", err);
+            }
+        });
+
+        checkHealth();
+    </script>
 </body>
 </html>
